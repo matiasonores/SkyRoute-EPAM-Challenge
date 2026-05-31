@@ -1,0 +1,13 @@
+@SkyRoute.API_HostAddress = http://localhost:5294
+
+### Health Check
+GET {{SkyRoute.API_HostAddress}}/flight/
+Accept: application/json
+
+###
+
+### Mock Flight Search Test
+GET {{SkyRoute.API_HostAddress}}/flight/search-test
+Accept: application/json
+
+###

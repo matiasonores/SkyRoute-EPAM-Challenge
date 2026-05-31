@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyRoute.API", "SkyRoute.API\SkyRoute.API.csproj", "{7F55923E-FB10-4CC4-88ED-3DF505B8074C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyRoute.Application", "SkyRoute.Application\SkyRoute.Application.csproj", "{E95B4517-E0C2-484C-A80C-E19FF13F4CE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyRoute.Domain", "SkyRoute.Domain\SkyRoute.Domain.csproj", "{975D4D5D-77F0-4588-9846-1DC6FD5778DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyRoute.Infraestructure", "SkyRoute.Infraestructure\SkyRoute.Infraestructure.csproj", "{1CF46FE4-EFBD-445D-A75E-A8401FF2E99F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F55923E-FB10-4CC4-88ED-3DF505B8074C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F55923E-FB10-4CC4-88ED-3DF505B8074C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F55923E-FB10-4CC4-88ED-3DF505B8074C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F55923E-FB10-4CC4-88ED-3DF505B8074C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E95B4517-E0C2-484C-A80C-E19FF13F4CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95B4517-E0C2-484C-A80C-E19FF13F4CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E95B4517-E0C2-484C-A80C-E19FF13F4CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E95B4517-E0C2-484C-A80C-E19FF13F4CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{975D4D5D-77F0-4588-9846-1DC6FD5778DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{975D4D5D-77F0-4588-9846-1DC6FD5778DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{975D4D5D-77F0-4588-9846-1DC6FD5778DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{975D4D5D-77F0-4588-9846-1DC6FD5778DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF46FE4-EFBD-445D-A75E-A8401FF2E99F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF46FE4-EFBD-445D-A75E-A8401FF2E99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF46FE4-EFBD-445D-A75E-A8401FF2E99F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF46FE4-EFBD-445D-A75E-A8401FF2E99F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B84C2AC-81BE-442C-9773-B130DB8AB877}
+	EndGlobalSection
+EndGlobal
