@@ -1,0 +1,34 @@
+<mat-toolbar class="toolbar">
+
+  <div
+    class="brand"
+    routerLink="/">
+    ✈ SkyRoute
+  </div>
+
+  <div class="spacer"></div>
+
+  <nav>
+
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+
+      Flights
+
+    </a>
+
+    <a
+      mat-button
+      routerLink="/bookings"
+      routerLinkActive="active-link">
+
+      Bookings
+
+    </a>
+
+  </nav>
+
+</mat-toolbar>

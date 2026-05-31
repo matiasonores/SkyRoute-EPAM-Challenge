@@ -1,0 +1,194 @@
+.create-booking {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ── Page header ────────────────────────────────────────────────────────────────
+
+.page-header {
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+// ── Cards ─────────────────────────────────────────────────────────────────────
+
+mat-card {
+  mat-card-header {
+    margin-bottom: 20px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+
+      mat-icon {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 1.2rem;
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+// ── Labels & values ────────────────────────────────────────────────────────────
+
+.field-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.field-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+// ── Flight info grid ──────────────────────────────────────────────────────────
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+// ── Route ─────────────────────────────────────────────────────────────────────
+
+.route-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.route-point {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.airport-code {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.airport-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.airport-city {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.route-arrow {
+  color: rgba(0, 0, 0, 0.38);
+  flex-shrink: 0;
+}
+
+// ── Pricing ───────────────────────────────────────────────────────────────────
+
+.pricing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.pricing-total {
+    padding-top: 4px;
+  }
+}
+
+.pricing-value {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1565c0;
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+
+.submit-row {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.confirm-btn {
+  height: 48px;
+  padding: 0 32px;
+  font-size: 1rem;
+
+  mat-icon {
+    margin-right: 6px;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .route-row {
+    gap: 8px;
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .create-booking {
+    padding: 16px 12px;
+  }
+
+  .page-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .airport-code {
+    font-size: 1.25rem;
+  }
+
+  .submit-row {
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

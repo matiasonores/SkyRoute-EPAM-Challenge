@@ -1,0 +1,50 @@
+.passenger-card {
+  mat-card-header {
+    margin-bottom: 20px;
+
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+
+      mat-icon {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 1.1rem;
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+    }
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.passenger-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media (max-width: 600px) {
+  .fields-row {
+    grid-template-columns: 1fr;
+  }
+}

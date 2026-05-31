@@ -1,0 +1,175 @@
+<section class="booking-list">
+
+  <!-- ── Page Header ─────────────────────────────────────────────────────── -->
+  <div class="page-header">
+    <div class="header-text">
+      <h1>My Bookings</h1>
+      <p>Manage your flight reservations</p>
+    </div>
+    @if (bookings().length > 0) {
+      <span class="booking-count">
+        <mat-icon>confirmation_number</mat-icon>
+        {{ bookings().length }} {{ bookings().length === 1 ? 'booking' : 'bookings' }}
+      </span>
+    }
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- ── Loading state ───────────────────────────────────────────────────── -->
+  @if (loading()) {
+    <div class="state-container">
+      <mat-icon class="state-icon">hourglass_empty</mat-icon>
+      <p>Loading your bookings...</p>
+    </div>
+  }
+
+  <!-- ── Empty state ─────────────────────────────────────────────────────── -->
+  @else if (bookings().length === 0) {
+    <div class="state-container">
+      <mat-card class="empty-card">
+        <mat-card-content>
+          <mat-icon class="empty-icon">flight_off</mat-icon>
+          <h2>No bookings found</h2>
+          <p>You have not created any bookings yet.</p>
+          <button mat-raised-button color="primary" (click)="searchFlights()">
+            <mat-icon>search</mat-icon>
+            Search Flights
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+
+  <!-- ── Desktop: Table ─────────────────────────────────────────────────── -->
+  @else {
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="bookings()" class="bookings-table">
+
+        <!-- Booking Reference -->
+        <ng-container matColumnDef="bookingReference">
+          <th mat-header-cell *matHeaderCellDef>Booking Ref</th>
+          <td mat-cell *matCellDef="let booking">
+            <span class="booking-ref">{{ booking.bookingReference }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let booking">
+            <mat-chip-set>
+              <mat-chip [class]="getStatusClass(booking.status)" disableRipple>
+                {{ booking.status }}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- Flight Number -->
+        <ng-container matColumnDef="flightNumber">
+          <th mat-header-cell *matHeaderCellDef>Flight</th>
+          <td mat-cell *matCellDef="let booking">
+            <span class="flight-number">{{ booking.flightNumber }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Created At -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Booked On</th>
+          <td mat-cell *matCellDef="let booking">
+            {{ booking.createdAt | date:'mediumDate' }}
+          </td>
+        </ng-container>
+
+        <!-- Passengers -->
+        <ng-container matColumnDef="passengers">
+          <th mat-header-cell *matHeaderCellDef>Pax</th>
+          <td mat-cell *matCellDef="let booking">
+            <span class="pax-cell">
+              <mat-icon>person</mat-icon>
+              {{ booking.passengerCount }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Total Price -->
+        <ng-container matColumnDef="totalPrice">
+          <th mat-header-cell *matHeaderCellDef>Total</th>
+          <td mat-cell *matCellDef="let booking">
+            <span class="price-cell">USD {{ booking.totalPrice | number:'1.2-2' }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let booking">
+            <div class="actions-cell">
+              <button
+                mat-icon-button
+                color="primary"
+                matTooltip="View Details"
+                (click)="viewBooking(booking)">
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="table-row"></tr>
+      </table>
+    </div>
+
+    <!-- ── Mobile: Cards ───────────────────────────────────────────────── -->
+    <div class="mobile-cards">
+      @for (booking of bookings(); track booking.id) {
+        <mat-card class="booking-card">
+          <mat-card-content>
+
+            <div class="card-header-row">
+              <span class="booking-ref">{{ booking.bookingReference }}</span>
+              <mat-chip-set>
+                <mat-chip [class]="getStatusClass(booking.status)" disableRipple>
+                  {{ booking.status }}
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="card-info-grid">
+              <div class="card-info-item">
+                <span class="field-label">Flight</span>
+                <span class="flight-number">{{ booking.flightNumber }}</span>
+              </div>
+              <div class="card-info-item">
+                <span class="field-label">Booked On</span>
+                <span class="field-value">{{ booking.createdAt | date:'mediumDate' }}</span>
+              </div>
+              <div class="card-info-item">
+                <span class="field-label">Passengers</span>
+                <span class="field-value">{{ booking.passengerCount }}</span>
+              </div>
+              <div class="card-info-item">
+                <span class="field-label">Total Price</span>
+                <span class="price-cell">USD {{ booking.totalPrice | number:'1.2-2' }}</span>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="card-actions">
+              <button mat-stroked-button color="primary" (click)="viewBooking(booking)">
+                <mat-icon>search</mat-icon>
+                View Details
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+</section>

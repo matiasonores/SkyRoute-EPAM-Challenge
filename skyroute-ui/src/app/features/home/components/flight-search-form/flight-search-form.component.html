@@ -1,0 +1,151 @@
+<mat-card class="search-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>travel_explore</mat-icon>
+      Search Flights
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- Origin / Destination -->
+      <div class="form-row two-col">
+        <mat-form-field appearance="outline">
+          <mat-label>Origin</mat-label>
+          <mat-select formControlName="origin">
+            <mat-option>
+              <input
+                class="airport-search"
+                placeholder="Search by code, city or airport..."
+                type="text"
+                (input)="originSearch.set($any($event.target).value)" />
+            </mat-option>
+            @for (airport of filteredOriginAirports(); track airport.id) {
+              <mat-option [value]="airport">
+                <span class="airport-code">{{ airport.code }}</span>
+                &nbsp;—&nbsp;{{ airport.city }}, {{ airport.name }}
+              </mat-option>
+            }
+          </mat-select>
+          @if (form.controls.origin.touched && form.controls.origin.hasError('required')) {
+            <mat-error>Origin is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Destination</mat-label>
+          <mat-select formControlName="destination">
+            <mat-option>
+              <input
+                class="airport-search"
+                placeholder="Search by code, city or airport..."
+                type="text"
+                (input)="destinationSearch.set($any($event.target).value)" />
+            </mat-option>
+            @for (airport of filteredDestinationAirports(); track airport.id) {
+              <mat-option [value]="airport">
+                <span class="airport-code">{{ airport.code }}</span>
+                &nbsp;—&nbsp;{{ airport.city }}, {{ airport.name }}
+              </mat-option>
+            }
+          </mat-select>
+          @if (form.controls.destination.touched && form.controls.destination.hasError('required')) {
+            <mat-error>Destination is required</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      @if (form.hasError('sameAirport') && (form.controls.origin.touched || form.controls.destination.touched)) {
+        <div class="inline-error">
+          <mat-icon>warning</mat-icon>
+          Origin and destination cannot be the same airport.
+        </div>
+      }
+
+      <mat-divider></mat-divider>
+
+      <!-- Departure Date / Flying Type / Flexible Dates -->
+      <div class="form-row three-col">
+        <mat-form-field appearance="outline">
+          <mat-label>Departure Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="departurePicker"
+            [min]="today"
+            formControlName="departureDate" />
+          <mat-datepicker-toggle matIconSuffix [for]="departurePicker" />
+          <mat-datepicker #departurePicker />
+          @if (form.controls.departureDate.touched && form.controls.departureDate.hasError('required')) {
+            <mat-error>Departure date is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Flying Type</mat-label>
+          <mat-select [value]="1" disabled>
+            <mat-option [value]="1">One Way</mat-option>
+            <mat-option [value]="2">Round Trip</mat-option>
+            <mat-option [value]="3">Multi City</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="toggle-field">
+          <span class="field-label">Flexible Dates</span>
+          <mat-slide-toggle disabled [checked]="false" color="primary"></mat-slide-toggle>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Passengers / Cabin Class -->
+      <div class="form-row two-col">
+        <div class="passengers-wrapper">
+          <mat-form-field appearance="outline" class="passengers-field">
+            <mat-label>Passengers</mat-label>
+            <input matInput readonly formControlName="passengers" />
+            <mat-icon matPrefix>person_outline</mat-icon>
+          </mat-form-field>
+          <div class="passengers-stepper">
+            <button
+              mat-icon-button
+              type="button"
+              (click)="decreasePassengers()"
+              [disabled]="form.controls.passengers.value! <= 1">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              type="button"
+              (click)="increasePassengers()"
+              [disabled]="form.controls.passengers.value! >= 9">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cabin Class</mat-label>
+          <mat-select formControlName="cabinClass">
+            @for (cc of cabinClasses; track cc.value) {
+              <mat-option [value]="cc.value">{{ cc.label }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="search-btn"
+          [disabled]="searching()">
+          <mat-icon>{{ searching() ? 'hourglass_empty' : 'flight_takeoff' }}</mat-icon>
+          {{ searching() ? 'Searching...' : 'Search Flights' }}
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

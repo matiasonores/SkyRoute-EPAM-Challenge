@@ -1,0 +1,73 @@
+<mat-card class="passenger-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>person</mat-icon>
+      Passenger {{ index + 1 }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div [formGroup]="form" class="passenger-fields">
+
+      <!-- Name / Email -->
+      <div class="fields-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" />
+          <mat-icon matPrefix>badge</mat-icon>
+          @if (form.controls['fullName'].touched && form.controls['fullName'].hasError('required')) {
+            <mat-error>Full name is required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="emailAddress" />
+          <mat-icon matPrefix>email</mat-icon>
+          @if (form.controls['emailAddress'].touched) {
+            @if (form.controls['emailAddress'].hasError('required')) {
+              <mat-error>Email is required</mat-error>
+            } @else if (form.controls['emailAddress'].hasError('email')) {
+              <mat-error>Enter a valid email address</mat-error>
+            }
+          }
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Document: conditional on isInternational -->
+      <div class="fields-row">
+        @if (isInternational) {
+          <mat-form-field appearance="outline">
+            <mat-label>Passport Number</mat-label>
+            <input 
+            matInput formControlName="passportNumber"/>
+            <mat-icon matPrefix>account_box</mat-icon>
+            <mat-hint>Passport number must contain 9 alphanumeric characters without spaces.</mat-hint>
+            @if (form.controls['passportNumber'].touched && form.controls['passportNumber'].hasError('required')) {
+              <mat-error>Passport number is required for international flights</mat-error>
+            }
+            @if (form.controls['passportNumber'].touched && form.controls['passportNumber'].hasError('invalidPassportNumber')) {
+              <mat-error>Enter a valid passport number</mat-error>
+            }
+          </mat-form-field>
+        } @else {
+          <mat-form-field appearance="outline">
+            <mat-label>National ID</mat-label>
+            <input matInput formControlName="nationalId"/>
+            <mat-icon matPrefix>account_box</mat-icon>
+            <mat-hint>National ID must be 9 digits long.</mat-hint>
+            @if (form.controls['nationalId'].touched && form.controls['nationalId'].hasError('required')) {
+              <mat-error>National ID is required for domestic flights</mat-error>
+            }
+            @if (form.controls['nationalId'].touched && form.controls['nationalId'].hasError('invalidNationalId')) {
+              <mat-error>Enter a valid national ID</mat-error>
+            }
+          </mat-form-field>
+        }
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

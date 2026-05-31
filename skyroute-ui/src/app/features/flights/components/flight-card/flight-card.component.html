@@ -1,0 +1,84 @@
+<mat-card class="flight-card">
+  <mat-card-content>
+
+    <!-- Provider / Airline / Flight Number -->
+    <div class="card-header">
+      <div class="airline-info">
+        <span class="provider">{{ flight.provider }}</span>
+        <span class="airline">{{ flight.airline }}</span>
+      </div>
+      <div class="flight-meta">
+        <span class="flight-number">{{ flight.flightNumber }}</span>
+        @if (flight.isInternational) {
+          <span class="badge badge-international">
+            <mat-icon>public</mat-icon>
+            International
+          </span>
+        } @else {
+          <span class="badge badge-domestic">
+            <mat-icon>home</mat-icon>
+            Domestic
+          </span>
+        }
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Route: Origin → Destination -->
+    <div class="route-row">
+      <div class="route-point">
+        <span class="airport-code">{{ flight.origin.code }}</span>
+        <span class="airport-name">{{ flight.origin.name }}</span>
+        <span class="airport-city">{{ flight.origin.city }}</span>
+        <span class="time">{{ flight.departure | date:'HH:mm' }}</span>
+        <span class="date">{{ flight.departure | date:'MMM d' }}</span>
+      </div>
+
+      <div class="route-middle">
+        <span class="duration-label">{{ formatDuration(flight.durationMinutes) }}</span>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+        <span class="cabin-label">{{ flight.cabinClass }}</span>
+      </div>
+
+      <div class="route-point route-point--right">
+        <span class="airport-code">{{ flight.destination.code }}</span>
+        <span class="airport-name">{{ flight.destination.name }}</span>
+        <span class="airport-city">{{ flight.destination.city }}</span>
+        <span class="time">{{ flight.arrival | date:'HH:mm' }}</span>
+        <span class="date">{{ flight.arrival | date:'MMM d' }}</span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Pricing + Book -->
+    <div class="pricing-row">
+      <div class="pricing-info">
+        <div class="pricing-item">
+          <span class="field-label">Per Passenger</span>
+          <span class="price-value">USD {{ flight.price | number:'1.2-2' }}</span>
+        </div>
+        <div class="pricing-item pricing-total-item">
+          <span class="field-label">Total</span>
+          <ng-container *ngIf="hasOffer(flight); else standardTotal">
+            <div class="offer-pricing-row">
+              <span class="price-original">USD {{ getOriginalPrice(flight) | number:'1.2-2' }}</span>
+              <span class="offer-badge">OFFER</span>
+              <span class="price-total price-final">USD {{ flight.totalPrice | number:'1.2-2' }}</span>
+            </div>
+          </ng-container>
+          <ng-template #standardTotal>
+            <span class="price-total">USD {{ flight.totalPrice | number:'1.2-2' }}</span>
+          </ng-template>
+        </div>
+      </div>
+
+      <button mat-raised-button color="primary" class="book-btn" (click)="onBook()">
+        <mat-icon>flight_takeoff</mat-icon>
+        Book Flight
+      </button>
+    </div>
+
+  </mat-card-content>
+</mat-card>

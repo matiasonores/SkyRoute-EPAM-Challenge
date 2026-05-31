@@ -1,0 +1,106 @@
+.results-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ── Page header ────────────────────────────────────────────────────────────────
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.header-text {
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+}
+
+.results-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.6);
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.sort-field {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+// ── Loading / empty states ─────────────────────────────────────────────────────
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+  gap: 12px;
+
+  h2 {
+    margin: 8px 0 0 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+.state-icon {
+  font-size: 3.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+// ── Results list ───────────────────────────────────────────────────────────────
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sort-field {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .results-page {
+    padding: 16px 12px;
+  }
+
+  .header-text h1 {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,53 @@
+<section class="results-page">
+
+  <!-- Header: title + count + sort -->
+  <div class="page-header">
+    <div class="header-text">
+      <h1>Flight Results</h1>
+      @if (!loading()) {
+        <p class="results-count">
+          <mat-icon>flight</mat-icon>
+          {{ totalResults() }} {{ totalResults() === 1 ? 'flight' : 'flights' }} found
+        </p>
+      }
+    </div>
+
+    <mat-form-field appearance="outline" class="sort-field">
+      <mat-label>Sort By</mat-label>
+      <mat-select [value]="sortOption()" (selectionChange)="changeSort($event.value)">
+        <mat-option value="price-asc">Price: Low to High</mat-option>
+        <mat-option value="price-desc">Price: High to Low</mat-option>
+        <mat-option value="duration">Duration</mat-option>
+        <mat-option value="departure">Departure Time</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Loading state -->
+  @if (loading()) {
+    <div class="state-container">
+      <mat-spinner diameter="56"></mat-spinner>
+      <h2>Searching flights...</h2>
+      <p>Comparing fares across providers</p>
+    </div>
+  }
+
+  <!-- Empty state -->
+  @else if (flights().length === 0) {
+    <div class="state-container">
+      <mat-icon class="state-icon">flight_off</mat-icon>
+      <h2>No flights found</h2>
+      <p>Try adjusting your dates, airports or cabin class.</p>
+    </div>
+  }
+
+  <!-- Results -->
+  @else {
+    <div class="results-list">
+      @for (flight of flights(); track flight.id) {
+        <app-flight-card [flight]="flight" (book)="bookFlight($event)" />
+      }
+    </div>
+  }
+
+</section>

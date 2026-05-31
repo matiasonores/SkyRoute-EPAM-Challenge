@@ -1,0 +1,120 @@
+<section class="create-booking">
+
+  <div class="page-header">
+    <h1>Confirm Booking</h1>
+  </div>
+
+  <!-- ── SECCIÓN 1: Flight Information ──────────────────────────────────── -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>flight</mat-icon>
+        Flight Information
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="field-label">Provider</span>
+          <span class="field-value">{{ flight().provider }}</span>
+        </div>
+        <div class="info-item">
+          <span class="field-label">Airline</span>
+          <span class="field-value">{{ flight().airline }}</span>
+        </div>
+        <div class="info-item">
+          <span class="field-label">Flight Number</span>
+          <span class="field-value">{{ flight().flightNumber }}</span>
+        </div>
+        <div class="info-item">
+          <span class="field-label">Cabin Class</span>
+          <span class="field-value">{{ flight().cabinClass }}</span>
+        </div>
+        <div class="info-item">
+          <span class="field-label">Duration</span>
+          <span class="field-value">{{ formatDuration(flight().durationMinutes) }}</span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="route-row">
+        <div class="route-point">
+          <span class="field-label">Origin</span>
+          <span class="airport-code">{{ flight().origin.code }}</span>
+          <span class="airport-name">{{ flight().origin.name }}</span>
+          <span class="airport-city">{{ flight().origin.city }}</span>
+        </div>
+        <mat-icon class="route-arrow">arrow_forward</mat-icon>
+        <div class="route-point">
+          <span class="field-label">Destination</span>
+          <span class="airport-code">{{ flight().destination.code }}</span>
+          <span class="airport-name">{{ flight().destination.name }}</span>
+          <span class="airport-city">{{ flight().destination.city }}</span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="field-label">Departure</span>
+          <span class="field-value">{{ flight().departure | date:'medium' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="field-label">Arrival</span>
+          <span class="field-value">{{ flight().arrival | date:'medium' }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- ── SECCIÓN 2: Pricing ──────────────────────────────────────────────── -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>payments</mat-icon>
+        Pricing
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="pricing-list">
+        <div class="pricing-row">
+          <span class="field-label">Price per Passenger</span>
+          <span class="pricing-value">USD {{ pricePerPassenger() | number:'1.2-2' }}</span>
+        </div>
+        <div class="pricing-row">
+          <span class="field-label">Passengers</span>
+          <span class="pricing-value">{{ passengerCount() }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="pricing-row pricing-total">
+          <span class="field-label">Total Price</span>
+          <span class="pricing-value total-amount">USD {{ dynamicTotalPrice() | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- ── SECCIÓN 3: Passengers ───────────────────────────────────────────── -->
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div formArrayName="passengers">
+      @for (passenger of passengers.controls; track $index; let i = $index) {
+        <app-passenger-form
+          [form]="$any(passenger)"
+          [isInternational]="flight().isInternational"
+          [index]="i" />
+      }
+    </div>
+
+    <div class="submit-row">
+      <button mat-raised-button color="primary" type="submit" class="confirm-btn">
+        <mat-icon>check_circle</mat-icon>
+        Confirm Booking
+      </button>
+    </div>
+  </form>
+
+</section>

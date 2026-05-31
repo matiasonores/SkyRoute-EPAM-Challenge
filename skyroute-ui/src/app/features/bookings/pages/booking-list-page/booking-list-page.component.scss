@@ -1,0 +1,309 @@
+.booking-list {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ── Page header ────────────────────────────────────────────────────────────────
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.header-text {
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+.booking-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.54);
+  padding-top: 4px;
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// ── States ─────────────────────────────────────────────────────────────────────
+
+.state-container {
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.state-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: rgba(0, 0, 0, 0.38);
+  margin-bottom: 8px;
+}
+
+.empty-card {
+  text-align: center;
+  padding: 16px;
+  max-width: 400px;
+  width: 100%;
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.9rem;
+  }
+
+  button {
+    margin-top: 4px;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+.empty-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+// ── Desktop table ──────────────────────────────────────────────────────────────
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.bookings-table {
+  width: 100%;
+
+  th.mat-mdc-header-cell {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(0, 0, 0, 0.54);
+    white-space: nowrap;
+  }
+
+  td.mat-mdc-cell {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 0.875rem;
+  }
+
+  .table-row {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+  }
+}
+
+// Booking reference
+.booking-ref {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+// Flight number
+.flight-number {
+  font-family: monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+// Passengers cell
+.pax-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+    color: rgba(0, 0, 0, 0.38);
+  }
+}
+
+// Price cell
+.price-cell {
+  font-weight: 600;
+  color: #1565c0;
+  white-space: nowrap;
+}
+
+// Actions cell
+.actions-cell {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+// ── Status chips ────────────────────────────────────────────────────────────────
+
+mat-chip {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  min-height: 24px !important;
+  padding: 0 10px !important;
+
+  &.status-confirmed {
+    background-color: #e8f5e9 !important;
+    color: #2e7d32 !important;
+  }
+
+  &.status-pending {
+    background-color: #fff8e1 !important;
+    color: #f57f17 !important;
+  }
+
+  &.status-cancelled {
+    background-color: #ffebee !important;
+    color: #c62828 !important;
+  }
+
+  &.status-unknown {
+    background-color: #f5f5f5 !important;
+    color: rgba(0, 0, 0, 0.54) !important;
+  }
+}
+
+// ── Mobile cards ───────────────────────────────────────────────────────────────
+
+.mobile-cards {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking-card {
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.field-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.field-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+
+  button {
+    flex: 1;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .booking-list {
+    padding: 16px 12px;
+    gap: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  // Hide table, show cards on mobile
+  .table-wrapper {
+    display: none;
+  }
+
+  .mobile-cards {
+    display: flex;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+}

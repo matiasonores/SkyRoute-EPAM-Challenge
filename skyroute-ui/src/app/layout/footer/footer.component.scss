@@ -1,0 +1,19 @@
+footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 24px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.provider-label {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
