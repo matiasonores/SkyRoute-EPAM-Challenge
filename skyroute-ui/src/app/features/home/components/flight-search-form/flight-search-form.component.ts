@@ -2,15 +2,18 @@ import {
   Component,
   computed,
   inject,
+  OnDestroy,
   signal
 } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subject, takeUntil } from 'rxjs';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,7 +57,7 @@ import { airportSelectionValidator } from '../../../../core/validators/airport-s
   templateUrl: './flight-search-form.component.html',
   styleUrl: './flight-search-form.component.scss'
 })
-export class FlightSearchFormComponent {
+export class FlightSearchFormComponent implements OnDestroy {
   private readonly flightApi = inject(FlightApiService);
   private readonly flightResults = inject(FlightResultsStateService);
   private readonly fb = inject(FormBuilder);
@@ -62,9 +65,12 @@ export class FlightSearchFormComponent {
   private readonly searchState = inject(SearchCriteriaStateService);
   readonly referenceState = inject(ReferenceDataStateService);
 
+  private readonly destroy$ = new Subject<void>();
   readonly airports = computed(() => this.referenceState.airports());
   readonly originSearch = signal('');
   readonly destinationSearch = signal('');
+  readonly originFilter = new FormControl('');
+  readonly destinationFilter = new FormControl('');
   readonly searching = signal(false);
 
   readonly filteredOriginAirports = computed(() => {
@@ -104,6 +110,21 @@ export class FlightSearchFormComponent {
   }, {
     validators: [airportSelectionValidator()]
   });
+
+  constructor() {
+    this.originFilter.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+      this.originSearch.set((value ?? '').toString());
+    });
+
+    this.destinationFilter.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+      this.destinationSearch.set((value ?? '').toString());
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   submit(): void {
     if (this.form.invalid) {

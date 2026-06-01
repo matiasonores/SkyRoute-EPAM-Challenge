@@ -14,13 +14,11 @@
         <mat-form-field appearance="outline">
           <mat-label>Origin</mat-label>
           <mat-select formControlName="origin">
-            <mat-option>
-              <input
-                class="airport-search"
-                placeholder="Search by code, city or airport..."
-                type="text"
-                (input)="originSearch.set($any($event.target).value)" />
-            </mat-option>
+            <ngx-mat-select-search
+              [formControl]="originFilter"
+              placeholderLabel="Search by code, city or airport..."
+              noEntriesFoundLabel="No airports found">
+            </ngx-mat-select-search>
             @for (airport of filteredOriginAirports(); track airport.id) {
               <mat-option [value]="airport">
                 <span class="airport-code">{{ airport.code }}</span>
@@ -36,13 +34,11 @@
         <mat-form-field appearance="outline">
           <mat-label>Destination</mat-label>
           <mat-select formControlName="destination">
-            <mat-option>
-              <input
-                class="airport-search"
-                placeholder="Search by code, city or airport..."
-                type="text"
-                (input)="destinationSearch.set($any($event.target).value)" />
-            </mat-option>
+            <ngx-mat-select-search
+              [formControl]="destinationFilter"
+              placeholderLabel="Search by code, city or airport..."
+              noEntriesFoundLabel="No airports found">
+            </ngx-mat-select-search>
             @for (airport of filteredDestinationAirports(); track airport.id) {
               <mat-option [value]="airport">
                 <span class="airport-code">{{ airport.code }}</span>
